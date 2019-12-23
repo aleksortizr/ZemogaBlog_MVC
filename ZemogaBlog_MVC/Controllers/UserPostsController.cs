@@ -72,16 +72,16 @@ namespace Blog_MVC.Controllers
             return RedirectToAction("Index", "UserPosts");
         }
 
-        [Route("Submit")]
-        public ActionResult Comment(int postId, string text)
-        {
-            if (!_postManagerService.SubmitPost(postId).Result)
-            {
-                return View();
-            }
+        //[Route("Submit")]
+        //public ActionResult Comment(int postId, string text)
+        //{
+        //    if (!_postManagerService.SubmitPost(postId).Result)
+        //    {
+        //        return View();
+        //    }
 
-            return RedirectToAction("Index", "UserPosts");
-        }
+        //    return RedirectToAction("Index", "UserPosts");
+        //}
 
     }
 }

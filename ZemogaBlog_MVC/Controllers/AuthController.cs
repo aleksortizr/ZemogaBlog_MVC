@@ -27,12 +27,21 @@ namespace Blog_MVC.Controllers
             this._userService = userService;
         }
 
+        /// <summary>
+        /// Shows the ligin page
+        /// </summary>
+        /// <returns></returns>
         [Route("login")]
         public IActionResult LogIn()
         {
             return View(new LoginModel());
         }
 
+        /// <summary>
+        /// Invokes the BL method to get logged in
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Route("login")]
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -53,12 +62,21 @@ namespace Blog_MVC.Controllers
             return await SignInUser(user);
         }
 
+        /// <summary>
+        /// Shows the User registration page
+        /// </summary>
+        /// <returns></returns>
         [Route("register")]
         public IActionResult Register()
         {
             return View();
         }
 
+        /// <summary>
+        /// Invokes the BL method to register a new user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Route("register")]
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -74,12 +92,20 @@ namespace Blog_MVC.Controllers
             return await SignInUser(user);
         }
 
+        /// <summary>
+        /// return the access denied page for Editor's only page
+        /// </summary>
+        /// <returns></returns>
         [Route("accessdenied")]
         public IActionResult AccessDenied()
         {
             return View();
         }
 
+        /// <summary>
+        /// Logs the current user out
+        /// </summary>
+        /// <returns></returns>
         [Route("logout")]
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -89,6 +115,11 @@ namespace Blog_MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// sets the claims and redirects to user information page to show the claims
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         private async Task<IActionResult> SignInUser(UserDTO user)
         {
             var claims = new List<Claim>
