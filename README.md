@@ -26,9 +26,14 @@ Anyway, here you can find some credentials for created users, as well as credent
 UserName	    Password	Role
 -------------------------------
 aleksortizr	  password	User
+
 editor	      editor	  Editor
+
 aortizr	      password	User
+
 aleksortizr1	password	User
+
 agortiz	      agortiz	  User
+
 admin	        admin	    Editor
   
