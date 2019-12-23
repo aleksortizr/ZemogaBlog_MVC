@@ -1,5 +1,6 @@
 # ZemogaBlog_MVC
 MVC App for Zemoga technical test
+Work hours: 20
 
 Created for .NET developer Zemoga technical test.
 Creation Date: 22/12/2019
