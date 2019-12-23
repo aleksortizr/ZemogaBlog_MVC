@@ -1,0 +1,56 @@
+﻿@model Blog_MVC.Models.EditorPostsModel
+
+@{
+    ViewData["Title"] = "Approved Posts";
+}
+
+<h1>Approved posts list</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Created Date</th>
+            <th>Text</th>
+            <th>Author</th>
+            <th>Approval Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.UserPosts != null && Model.UserPosts.Count() > 0)
+        {
+            @foreach (var item in Model.UserPosts.OrderByDescending(p => p.ApprovalDate))
+            {
+                <tr>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.Text</td>
+                    <td>@item.Author</td>
+                    <td>@item.ApprovalDate</td>
+                    <td>@Html.ActionLink("Reply", "SubmitComment", "Post", new { postId = item.Id })<b></b></td>
+                </tr>
+                foreach (var commentItem in item.Comments.OrderByDescending(c => c.CreatedDate))
+                {
+                    <tr>
+                        <td class="float-md-right">
+                            @commentItem.UserName commented:
+                        </td>
+                        <td>
+                            @commentItem.Text
+                        </td>
+                        <td>
+                            On @commentItem.CreatedDate
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <small id="searchHelp" class="form-text text-muted">Query returned no elements.</small>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

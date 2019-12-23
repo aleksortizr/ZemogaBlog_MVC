@@ -1,0 +1,42 @@
+﻿@model Blog_MVC.Models.SubmitCommentModel
+
+@{
+    ViewData["Title"] = "CommentPost";
+}
+
+<h1>CommentPost</h1>
+
+<h4>Write down your toughts...</h4>
+<hr />
+<div class="row">
+    @*@if (!ViewData.ModelState.IsValid)
+        {
+            <div asp-validation-summary="All" class="alert alert-danger"></div>
+        }*@
+    <div class="col-md-4">
+
+        <form asp-controller="Post" asp-action="SubmitComment">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserName)
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.Post.Id)
+            @Html.HiddenFor(model => model.Post.Text)
+
+            <div class="form-group">
+                @Model.UserName said:
+                @Model.Post.Text
+            </div><hr />
+            <div class="form-group form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input asp-for="Text" class="form-control" placeholder="Type your reply" />
+                </div>
+                <input type="submit" value="Ok" class="btn btn-primary" />
+            </div>
+
+            <div class="form-group">
+                <span asp-validation-for="Text" class="text-danger"></span>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </div>
+        </form>
+    </div>
+</div>

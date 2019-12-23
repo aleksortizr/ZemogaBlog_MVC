@@ -1,0 +1,46 @@
+﻿@model Blog_MVC.Models.EditorPostsModel
+
+@{
+    ViewData["Title"] = "Pending Posts";
+}
+
+<h1>Your posts</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Text</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.UserPosts != null && Model.UserPosts.Count() > 0)
+        {
+            @foreach (var item in Model.UserPosts.OrderByDescending(p => p.CreatedDate))
+            {
+                <tr>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.Text</td>
+                    <td>
+                        @if (item.StatusName == Blog_Common.PostStatuses.Pending.ToString())
+                        {
+                        @Html.ActionLink("Approve", "Approve", "Editor", new { postId = item.Id },  new { onclick = "return confirm('Are you sure you wish to approve this post?');"  })<b></b>
+                        @Html.ActionLink("Reject", "Reject", "Editor", new { postId = item.Id },  new { onclick = "return confirm('Are you sure you wish to reject this post?');" })<b></b>
+                        @Html.ActionLink("Delete", "Delete", "Editor", new { postId = item.Id },  new { onclick = "return confirm('Are you sure you wish to delete this post?');" })
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <small id="searchHelp" class="form-text text-muted">Query returned no elements.</small>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
