@@ -37,8 +37,13 @@ namespace Blog_MVC.Services
                 RoleId = 1
             };
 
-            if (_blogUserManager.Register(newUser) > 0)
+            var newUserId = _blogUserManager.Register(newUser);
+            if (newUserId > 0)
+            {
+                newUser.Id = newUserId;
+                newUser.Role = Blog_Common.Roles.Writer.ToString();
                 return Task.FromResult(newUser);
+            }
             return null;
         }
         public Task<UserDTO> Authenticate(string userName, string password)
